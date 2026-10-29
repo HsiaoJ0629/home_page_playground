@@ -1,0 +1,298 @@
+/* Reusable components. Requires design-system.css + base.css.
+   Naming: block, block__element, block--modifier. State classes: .is-open, .is-missing. */
+
+/* ---------- Buttons ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  min-width: 44px;
+  padding: var(--space-3) var(--space-5);
+  border: 1px solid transparent;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background-color var(--duration-fast) ease, border-color var(--duration-fast) ease,
+              color var(--duration-fast) ease, box-shadow var(--duration-fast) ease,
+              transform var(--duration-fast) var(--ease-out);
+}
+.btn:active { transform: translateY(1px); }
+
+.btn--primary { background: var(--primary-color); color: var(--primary-contrast); }
+.btn--primary:hover { box-shadow: var(--shadow-glow); }
+
+.btn--secondary { background: transparent; color: var(--text-primary); border-color: var(--text-primary); }
+.btn--secondary:hover { background: var(--text-primary); color: var(--bg-primary); }
+
+.btn--ghost { background: transparent; color: var(--text-primary); padding-inline: var(--space-3); }
+.btn--ghost:hover { background: var(--bg-secondary); }
+
+.btn__icon { width: 1.125em; height: 1.125em; flex: none; }
+
+/* ---------- Eyebrow / badge ---------- */
+.eyebrow {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 500;
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-1) var(--space-3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+  background: var(--bg-elevated);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+.badge--live::before {
+  content: "";
+  width: 0.5rem; height: 0.5rem;
+  border-radius: 50%;
+  background: var(--accent-color);
+  animation: badge-pulse 2s ease-in-out infinite;
+}
+@keyframes badge-pulse { 50% { opacity: 0.35; } }
+
+/* ---------- Card ---------- */
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  padding: var(--space-6);
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--duration-base) ease, box-shadow var(--duration-base) ease;
+}
+.card:hover { border-color: var(--glow-color); box-shadow: var(--shadow-md); }
+.card__icon { width: 2.5rem; height: 2.5rem; color: var(--primary-color); }
+.card__title { font-size: var(--text-xl); }
+.card__body { color: var(--text-secondary); }
+
+/* ---------- Site header + nav ---------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: color-mix(in srgb, var(--bg-primary) 88%, transparent);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--border-color);
+}
+.site-header__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+  min-height: var(--header-h);
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  font-family: var(--font-display);
+  font-size: var(--text-lg);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+.brand__mark { width: 1.75rem; height: 1.75rem; flex: none; color: var(--glow-color); }
+
+.nav-toggle {
+  display: inline-grid;
+  place-items: center;
+  width: 44px; height: 44px;
+  padding: 0;
+  background: transparent;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+}
+.nav-toggle__bars,
+.nav-toggle__bars::before,
+.nav-toggle__bars::after {
+  display: block;
+  width: 18px; height: 2px;
+  background: currentColor;
+  border-radius: 1px;
+  transition: transform var(--duration-base) var(--ease-out), opacity var(--duration-fast) ease;
+}
+.nav-toggle__bars { position: relative; }
+.nav-toggle__bars::before, .nav-toggle__bars::after { content: ""; position: absolute; left: 0; }
+.nav-toggle__bars::before { top: -6px; }
+.nav-toggle__bars::after { top: 6px; }
+.site-header.is-open .nav-toggle__bars { background: transparent; }
+.site-header.is-open .nav-toggle__bars::before { transform: translateY(6px) rotate(45deg); }
+.site-header.is-open .nav-toggle__bars::after { transform: translateY(-6px) rotate(-45deg); }
+
+/* Mobile: nav is a drop-down panel. Hidden only once JS is present (html.has-js). */
+.site-nav {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+.has-js .site-nav {
+  position: absolute;
+  inset: 100% 0 auto 0;
+  padding: var(--space-4) var(--gutter) var(--space-8);
+  background: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  box-shadow: var(--shadow-lg);
+  display: none;
+}
+.has-js .site-header.is-open .site-nav { display: flex; }
+
+.site-nav__list { display: flex; flex-direction: column; gap: var(--space-1); }
+.site-nav__link {
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--space-2);
+  color: var(--text-primary);
+  font-weight: 500;
+  text-decoration: none;
+  border-radius: var(--radius-sm);
+}
+.site-nav__link:hover { color: var(--primary-color); }
+.site-nav__link[aria-current="true"] { color: var(--primary-color); }
+.site-nav__actions { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3); }
+
+@media (min-width: 1024px) {
+  .nav-toggle { display: none; }
+  .site-nav,
+  .has-js .site-nav {
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--space-8);
+    padding: 0;
+    background: none;
+    border: 0;
+    box-shadow: none;
+  }
+  .site-nav__list { flex-direction: row; gap: var(--space-2); }
+  .site-nav__link { padding-inline: var(--space-3); font-size: var(--text-sm); }
+  .site-nav__actions { flex-wrap: nowrap; }
+}
+
+/* ---------- Theme toggle (segmented: light / dark / system) ---------- */
+.theme-toggle {
+  display: inline-flex;
+  padding: 2px;
+  gap: 2px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-pill);
+}
+.theme-toggle__option {
+  display: inline-grid;
+  place-items: center;
+  width: 44px; height: 40px; /* 44px hit area including the 2px track padding */
+  padding: 0;
+  background: transparent;
+  border: 0;
+  border-radius: var(--radius-pill);
+  color: var(--text-secondary);
+  transition: background-color var(--duration-fast) ease, color var(--duration-fast) ease;
+}
+.theme-toggle__option svg { width: 18px; height: 18px; }
+.theme-toggle__option:hover { color: var(--text-primary); }
+.theme-toggle__option[aria-pressed="true"] {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Back to gallery (floating pill on every variant) ----------
+   Literal values so a variant that skips the shared CSS can copy this rule as is. */
+.back-pill {
+  position: fixed; left: max(16px, env(safe-area-inset-left)); bottom: max(16px, env(safe-area-inset-bottom)); z-index: 100;
+  display: inline-flex; align-items: center; gap: 6px;
+  min-height: 44px; padding: 0 16px 0 12px;
+  border: 1px solid color-mix(in srgb, var(--text-primary) 14%, transparent); border-radius: 999px;
+  background: color-mix(in srgb, var(--bg-elevated) 85%, transparent); backdrop-filter: blur(12px);
+  color: var(--text-primary); font: 600 0.875rem/1 system-ui, -apple-system, "Segoe UI", sans-serif; text-decoration: none;
+  box-shadow: 0 6px 20px -8px rgb(0 0 0 / 0.35);
+}
+.back-pill:hover { background: var(--bg-elevated); }
+.back-pill svg { width: 16px; height: 16px; }
+body.has-book-bar .back-pill { bottom: 88px; } /* clear the mobile Book bar in the Lune variants */
+.is-embedded .back-pill { display: none; } /* hidden in the gallery's live previews */
+
+/* ---------- Art frame (2:3 artwork with a missing-image fallback) ---------- */
+.art-frame {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  width: 100%;
+  margin: 0;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(165deg, var(--art-placeholder-from), var(--art-placeholder-to));
+}
+.art-frame > img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center bottom;
+}
+.art-frame--bleed { border-radius: 0; background: transparent; } /* image sits directly on the canvas */
+
+/* Missing state: hide the broken image (kept in the a11y tree), draw a faint figure + grid + label */
+.art-frame.is-missing { background: linear-gradient(165deg, var(--art-placeholder-from), var(--art-placeholder-to)); }
+.art-frame.is-missing > img { position: absolute; inset: 0; opacity: 0; }
+.art-frame.is-missing::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    /* katana */
+    linear-gradient(118deg, transparent 49.4%, var(--art-silhouette) 49.4% 50.6%, transparent 50.6%) 72% 38% / 46% 40% no-repeat,
+    /* head */
+    radial-gradient(closest-side, var(--art-silhouette) 96%, transparent) 50% 13% / 15% 10% no-repeat,
+    /* shoulders */
+    radial-gradient(closest-side, var(--art-silhouette) 96%, transparent) 50% 29% / 46% 16% no-repeat,
+    /* torso */
+    linear-gradient(var(--art-silhouette), var(--art-silhouette)) 50% 45% / 28% 22% no-repeat,
+    /* legs */
+    linear-gradient(var(--art-silhouette), var(--art-silhouette)) 42% 86% / 10% 36% no-repeat,
+    linear-gradient(var(--art-silhouette), var(--art-silhouette)) 58% 86% / 10% 36% no-repeat,
+    /* HUD grid */
+    repeating-linear-gradient(0deg, transparent 0 31px, var(--art-silhouette) 31px 32px),
+    repeating-linear-gradient(90deg, transparent 0 31px, var(--art-silhouette) 31px 32px);
+  opacity: 0.9;
+}
+.art-frame.is-missing::after {
+  content: "Art pending";
+  position: absolute;
+  left: var(--space-3);
+  bottom: var(--space-3);
+  padding: var(--space-1) var(--space-2);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  background: var(--bg-primary);
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  text-transform: uppercase;
+}

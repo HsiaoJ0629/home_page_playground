@@ -1,0 +1,107 @@
+/* 04 · Lune Sage & Clay: colour-only re-skin of 03.
+   Layout and components come from ../03-lune-lookbook/styles.css (loaded first);
+   this file only re-values the colour tokens. Contrast ratios in notes.md. */
+
+:root {
+  color-scheme: light;
+  --bg-primary: #F7F3EC;      /* oat cream paper */
+  --bg-secondary: #EFE8DC;    /* oat wash */
+  --bg-elevated: #FCFAF6;
+  --text-primary: #2A3127;    /* moss ink, 12.12:1 */
+  --text-secondary: #565E52;  /* 6.09:1 */
+  --border-color: #DDD5C6;    /* decorative hairline */
+  --primary-color: #4A6450;   /* deep sage, 5.88:1 */
+  --primary-contrast: #FFFFFF;
+  --secondary-color: #E2C4B2; /* soft clay ornament, never text */
+  --accent-color: #A04F36;    /* terracotta price numerals, 5.18:1 */
+  --glow-color: #D9B9A3;
+  --focus-ring: #4A6450;
+  --shadow-sm: 0 1px 2px rgb(42 49 39 / 0.05);
+  --shadow-md: 0 12px 28px -14px rgb(42 49 39 / 0.18);
+  --shadow-lg: 0 28px 56px -24px rgb(42 49 39 / 0.22);
+  --shadow-glow: 0 0 0 1px rgb(217 185 163 / 0.6), 0 10px 24px -10px rgb(74 100 80 / 0.35);
+  --art-placeholder-from: #F3EDE3;
+  --art-placeholder-to: #E2C4B2;
+  --art-silhouette: rgb(42 49 39 / 0.10);
+  --chip-outline: #7A8473;    /* 3.53:1 non-text */
+  --chip-selected-bg: #E3E9DD;
+  --chip-selected-fg: var(--primary-color);
+  --btn-hover: #3B5141;
+  --band-bg: #2C3A2F;         /* deep moss */
+  --band-text: #F3EEE4;
+  --band-muted: #CBD3C1;
+  --band-btn: #E0A88C;        /* light clay */
+  --band-btn-text: #2C3A2F;
+  --band-btn-hover: #EBBDA5;
+  --band-rule: #4A5B4D;
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg-primary: #161A15;      /* moss-black */
+  --bg-secondary: #1E241D;
+  --bg-elevated: #262D24;
+  --text-primary: #EEE9DE;
+  --text-secondary: #B9BFAF;
+  --border-color: #343D32;
+  --primary-color: #A9C2A3;   /* pale sage */
+  --primary-contrast: #1A2219;
+  --secondary-color: #4F5E4A;
+  --accent-color: #E09A7C;    /* warm clay */
+  --glow-color: #A9C2A3;
+  --focus-ring: #C5D8BF;
+  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-md: 0 12px 28px -14px rgb(0 0 0 / 0.6);
+  --shadow-lg: 0 28px 56px -24px rgb(0 0 0 / 0.7);
+  --shadow-glow: 0 0 0 1px rgb(169 194 163 / 0.35), 0 10px 24px -10px rgb(169 194 163 / 0.25);
+  --art-placeholder-from: #1E241D;
+  --art-placeholder-to: #33402F;
+  --art-silhouette: rgb(169 194 163 / 0.12);
+  --chip-outline: #6F7D69;
+  --chip-selected-bg: #A9C2A3;
+  --chip-selected-fg: #1A2219;
+  --btn-hover: #C0D4BA;
+  --band-bg: #262D24;
+  --band-text: #EEE9DE;
+  --band-muted: #B9BFAF;
+  --band-btn: #E0A88C;
+  --band-btn-text: #241A14;
+  --band-btn-hover: #EBBDA5;
+  --band-rule: #3E4A3B;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg-primary: #161A15;      /* moss-black */
+    --bg-secondary: #1E241D;
+    --bg-elevated: #262D24;
+    --text-primary: #EEE9DE;
+    --text-secondary: #B9BFAF;
+    --border-color: #343D32;
+    --primary-color: #A9C2A3;   /* pale sage */
+    --primary-contrast: #1A2219;
+    --secondary-color: #4F5E4A;
+    --accent-color: #E09A7C;    /* warm clay */
+    --glow-color: #A9C2A3;
+    --focus-ring: #C5D8BF;
+    --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.4);
+    --shadow-md: 0 12px 28px -14px rgb(0 0 0 / 0.6);
+    --shadow-lg: 0 28px 56px -24px rgb(0 0 0 / 0.7);
+    --shadow-glow: 0 0 0 1px rgb(169 194 163 / 0.35), 0 10px 24px -10px rgb(169 194 163 / 0.25);
+    --art-placeholder-from: #1E241D;
+    --art-placeholder-to: #33402F;
+    --art-silhouette: rgb(169 194 163 / 0.12);
+    --chip-outline: #6F7D69;
+    --chip-selected-bg: #A9C2A3;
+    --chip-selected-fg: #1A2219;
+    --btn-hover: #C0D4BA;
+    --band-bg: #262D24;
+    --band-text: #EEE9DE;
+    --band-muted: #B9BFAF;
+    --band-btn: #E0A88C;
+    --band-btn-text: #241A14;
+    --band-btn-hover: #EBBDA5;
+    --band-rule: #3E4A3B;
+  }
+}
